@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1116" />
+  <title>三宅DUNKS</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="ball" aria-hidden="true">🏀</span>
+      <div>
+        <h1>三宅DUNKS</h1>
+        <p class="sub">ミニバスケットボール チーム管理</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab is-active" data-tab="practice" role="tab">練習メニュー</button>
+    <button class="tab" data-tab="schedule" role="tab">スケジュール</button>
+    <button class="tab" data-tab="sns" role="tab">SNS</button>
+  </nav>
+
+  <main>
+    <!-- 練習メニュー -->
+    <section id="practice" class="panel is-active">
+      <div class="panel-head">
+        <h2>練習メニュー</h2>
+        <span class="updated" id="practice-updated"></span>
+      </div>
+      <div id="practice-list" class="cards"></div>
+    </section>
+
+    <!-- スケジュール -->
+    <section id="schedule" class="panel">
+      <div class="panel-head">
+        <h2>スケジュール</h2>
+        <span class="updated" id="schedule-updated"></span>
+      </div>
+      <div class="filter" id="schedule-filter">
+        <button class="chip is-active" data-type="all">すべて</button>
+        <button class="chip" data-type="練習">練習</button>
+        <button class="chip" data-type="試合">試合</button>
+      </div>
+      <div id="schedule-list" class="cards"></div>
+    </section>
+
+    <!-- SNS -->
+    <section id="sns" class="panel">
+      <div class="panel-head">
+        <h2>SNS 投稿予定</h2>
+        <span class="updated" id="sns-updated"></span>
+      </div>
+      <div class="cal-nav">
+        <button id="cal-prev" aria-label="前の月">‹</button>
+        <strong id="cal-label"></strong>
+        <button id="cal-next" aria-label="次の月">›</button>
+      </div>
+      <div id="calendar" class="calendar"></div>
+      <div id="sns-day" class="sns-day"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <footer class="app-footer">三宅DUNKS · GitHub Pages</footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

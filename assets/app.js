@@ -99,9 +99,27 @@ function renderScheduleList() {
   }).join("");
 }
 
+function renderRegular() {
+  const wrap = $("#regular");
+  const reg = scheduleData?.regular;
+  if (!reg || !reg.days?.length) { wrap.innerHTML = ""; return; }
+  const dowColor = { "日": "sun", "土": "sat" };
+  wrap.innerHTML = `
+    <div class="regular-box">
+      <div class="regular-title">基本練習日程<span>毎週</span></div>
+      ${reg.days.map((d) => `
+        <div class="regular-row">
+          <span class="rday ${dowColor[d.day] || ""}">${esc(d.day)}</span>
+          <span class="rtime">${esc(d.time)}</span>
+        </div>`).join("")}
+      ${reg.note ? `<div class="regular-note">${esc(reg.note)}</div>` : ""}
+    </div>`;
+}
+
 async function renderSchedule() {
   scheduleData = await loadJSON("data/schedule.json");
   if (scheduleData?.updated) $("#schedule-updated").textContent = "更新 " + scheduleData.updated;
+  renderRegular();
   $$("#schedule-filter .chip").forEach((c) => c.addEventListener("click", () => {
     $$("#schedule-filter .chip").forEach((x) => x.classList.remove("is-active"));
     c.classList.add("is-active");

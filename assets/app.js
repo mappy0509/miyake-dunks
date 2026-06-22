@@ -53,21 +53,64 @@ $$(".tab").forEach((tab) => {
   });
 });
 
-/* ---------- 練習メニュー ---------- */
+/* ---------- 練習メニュー（期 → 曜日 → チーム別） ---------- */
+let practiceData = null;
+let curSeason = 0;
+let curDay = 0;
+const teamClass = (t, i) => ({ 0: "g-all", 1: "g-a", 2: "g-b" }[i] || "g-all");
+
+function renderPracticeBody() {
+  const season = practiceData.seasons[curSeason];
+  if (!season) return;
+  // 期サマリー
+  $("#season-summary").textContent = season.summary || "";
+  // 曜日タブ
+  $("#day-tabs").innerHTML = (season.days || []).map((d, i) =>
+    `<button class="seg-btn ${i === curDay ? "is-active" : ""}" data-day="${i}">${esc(d.day)}</button>`).join("");
+  $$("#day-tabs .seg-btn").forEach((b) => b.addEventListener("click", () => { curDay = +b.dataset.day; renderPracticeBody(); }));
+
+  const day = season.days[curDay] || season.days[0];
+  $("#day-time").textContent = day?.time ? "⏰ " + day.time : "";
+
+  const teams = practiceData.teams || [];
+  $("#practice-list").innerHTML = teams.map((t, ti) => {
+    const items = (day?.groups?.[t]) || [];
+    const body = items.length
+      ? items.map((m) => `
+          <div class="card">
+            <div class="row1">
+              <span class="name">${esc(m.name)}</span>
+              ${m.time ? `<span class="badge time">${esc(m.time)}</span>` : ""}
+            </div>
+            ${m.detail ? `<div class="detail">${esc(m.detail)}</div>` : ""}
+          </div>`).join("")
+      : `<p class="empty-note small">この曜日のメニューは未設定</p>`;
+    return `
+      <div class="group ${teamClass(t, ti)}">
+        <div class="group-head"><span class="dot"></span>${esc(t)}<span class="cnt">${items.length}</span></div>
+        <div class="cards">${body}</div>
+      </div>`;
+  }).join("");
+}
+
 async function renderPractice() {
-  const data = await loadJSON("data/practice.json");
-  const wrap = $("#practice-list");
-  if (!data || !data.menus?.length) { wrap.innerHTML = `<p class="empty-note">メニューがまだありません。<br>data/practice.json に追加してください。</p>`; return; }
-  if (data.updated) $("#practice-updated").textContent = "更新 " + data.updated;
-  wrap.innerHTML = data.menus.map((m) => `
-    <div class="card">
-      <div class="row1">
-        <span class="badge">${esc(m.category)}</span>
-        <span class="name">${esc(m.name)}</span>
-        ${m.time ? `<span class="badge time">${esc(m.time)}</span>` : ""}
-      </div>
-      ${m.detail ? `<div class="detail">${esc(m.detail)}</div>` : ""}
-    </div>`).join("");
+  practiceData = await loadJSON("data/practice.json");
+  const host = $("#practice-list");
+  if (!practiceData || !practiceData.seasons?.length) {
+    host.innerHTML = `<p class="empty-note">メニューがまだありません。<br>data/practice.json に追加してください。</p>`;
+    return;
+  }
+  if (practiceData.updated) $("#practice-updated").textContent = "更新 " + practiceData.updated;
+  // 期タブ
+  $("#season-tabs").innerHTML = practiceData.seasons.map((s, i) =>
+    `<button class="chip ${i === curSeason ? "is-active" : ""}" data-s="${i}">${esc(s.name)}</button>`).join("");
+  $$("#season-tabs .chip").forEach((b) => b.addEventListener("click", () => {
+    curSeason = +b.dataset.s; curDay = 0;
+    $$("#season-tabs .chip").forEach((x) => x.classList.remove("is-active"));
+    b.classList.add("is-active");
+    renderPracticeBody();
+  }));
+  renderPracticeBody();
 }
 
 /* ---------- スケジュール ---------- */

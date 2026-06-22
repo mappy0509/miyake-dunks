@@ -80,6 +80,30 @@ main { max-width: 720px; margin: 0 auto; padding: 16px 12px; }
 .badge.練習 { background: rgba(74,169,255,.15); color: var(--practice); }
 .badge.試合 { background: rgba(255,93,93,.15); color: var(--game); }
 
+/* Practice: 期チップ */
+.season-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 8px; -webkit-overflow-scrolling: touch; }
+.season-tabs::-webkit-scrollbar { display: none; }
+.season-tabs .chip { white-space: nowrap; flex: 0 0 auto; }
+.season-summary { color: var(--muted); font-size: 12px; margin: 0 2px 14px; }
+.season-summary:empty { display: none; }
+
+/* Practice: 曜日セグメント */
+.seg { display: flex; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 4px; }
+.seg-btn { flex: 1; padding: 9px 0; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font-size: 15px; font-weight: 700; cursor: pointer; transition: .15s; }
+.seg-btn.is-active { background: var(--accent); color: #fff; }
+.day-time { text-align: center; color: var(--accent-2); font-size: 13px; font-weight: 600; margin: 10px 0 16px; }
+.day-time:empty { display: none; }
+
+/* Practice: チーム別グループ */
+.group { margin-bottom: 18px; }
+.group-head { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; margin-bottom: 8px; padding-left: 2px; }
+.group-head .dot { width: 10px; height: 10px; border-radius: 3px; background: var(--accent); }
+.group-head .cnt { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--muted); background: var(--surface-2); padding: 1px 9px; border-radius: 999px; }
+.group.g-all .dot { background: var(--accent); }
+.group.g-a .dot { background: var(--practice); }
+.group.g-b .dot { background: var(--accent-2); }
+.empty-note.small { padding: 14px 0; font-size: 12px; }
+
 /* Regular weekly schedule */
 .regular-box {
   background: linear-gradient(135deg, rgba(238,103,48,.14), rgba(255,161,74,.06));

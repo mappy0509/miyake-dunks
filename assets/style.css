@@ -103,6 +103,9 @@ main { max-width: 720px; margin: 0 auto; padding: 16px 12px; }
 .group.g-a .dot { background: var(--practice); }
 .group.g-b .dot { background: var(--accent-2); }
 .empty-note.small { padding: 14px 0; font-size: 12px; }
+.steps { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.steps li { position: relative; padding-left: 16px; font-size: 13.5px; color: #d7dce6; }
+.steps li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 
 /* Regular weekly schedule */
 .regular-box {

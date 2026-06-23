@@ -83,6 +83,7 @@ function renderPracticeBody() {
               ${m.time ? `<span class="badge time">${esc(m.time)}</span>` : ""}
             </div>
             ${m.detail ? `<div class="detail">${esc(m.detail)}</div>` : ""}
+            ${Array.isArray(m.steps) && m.steps.length ? `<ul class="steps">${m.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}
           </div>`).join("")
       : `<p class="empty-note small">この曜日のメニューは未設定</p>`;
     return `

@@ -20,8 +20,8 @@
 
   <nav class="tabs" role="tablist">
     <button class="tab is-active" data-tab="practice" role="tab">練習メニュー</button>
-    <button class="tab" data-tab="schedule" role="tab">スケジュール</button>
-    <button class="tab" data-tab="sns" role="tab">SNS</button>
+    <button class="tab is-locked" data-tab="schedule" role="tab" disabled aria-disabled="true">スケジュール<span class="lock">🔒</span></button>
+    <button class="tab is-locked" data-tab="sns" role="tab" disabled aria-disabled="true">SNS<span class="lock">🔒</span></button>
   </nav>
 
   <main>
@@ -31,42 +31,27 @@
         <h2>練習メニュー</h2>
         <span class="updated" id="practice-updated"></span>
       </div>
-      <div id="season-tabs" class="season-tabs"></div>
-      <p id="season-summary" class="season-summary"></p>
       <div id="day-tabs" class="seg"></div>
       <div id="day-time" class="day-time"></div>
       <div id="practice-list"></div>
     </section>
 
-    <!-- スケジュール -->
+    <!-- スケジュール（準備中・ロック） -->
     <section id="schedule" class="panel">
-      <div class="panel-head">
+      <div class="locked-panel">
+        <span class="locked-icon">🔒</span>
         <h2>スケジュール</h2>
-        <span class="updated" id="schedule-updated"></span>
+        <p>このページは準備中です。<br>近日公開予定です。</p>
       </div>
-      <div id="regular"></div>
-      <h3 class="sub-h">個別予定</h3>
-      <div class="filter" id="schedule-filter">
-        <button class="chip is-active" data-type="all">すべて</button>
-        <button class="chip" data-type="練習">練習</button>
-        <button class="chip" data-type="試合">試合</button>
-      </div>
-      <div id="schedule-list" class="cards"></div>
     </section>
 
-    <!-- SNS -->
+    <!-- SNS（準備中・ロック） -->
     <section id="sns" class="panel">
-      <div class="panel-head">
+      <div class="locked-panel">
+        <span class="locked-icon">🔒</span>
         <h2>SNS 投稿予定</h2>
-        <span class="updated" id="sns-updated"></span>
+        <p>このページは準備中です。<br>近日公開予定です。</p>
       </div>
-      <div class="cal-nav">
-        <button id="cal-prev" aria-label="前の月">‹</button>
-        <strong id="cal-label"></strong>
-        <button id="cal-next" aria-label="次の月">›</button>
-      </div>
-      <div id="calendar" class="calendar"></div>
-      <div id="sns-day" class="sns-day"></div>
     </section>
   </main>
 

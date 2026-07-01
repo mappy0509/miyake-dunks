@@ -50,6 +50,14 @@ body {
   transition: .15s;
 }
 .tab.is-active { background: var(--surface-2); color: var(--text); }
+.tab.is-locked { opacity: .45; cursor: not-allowed; }
+.tab .lock { font-size: 11px; margin-left: 3px; }
+
+/* Locked panel (準備中) */
+.locked-panel { text-align: center; padding: 60px 20px; color: var(--muted); }
+.locked-panel .locked-icon { font-size: 40px; display: block; margin-bottom: 14px; opacity: .7; }
+.locked-panel h2 { font-size: 18px; margin: 0 0 10px; color: var(--text); }
+.locked-panel p { font-size: 13px; line-height: 1.7; margin: 0; }
 
 /* Panels */
 main { max-width: 720px; margin: 0 auto; padding: 16px 12px; }
